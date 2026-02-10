@@ -1,35 +1,31 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { Routes, Route } from "react-router-dom";
+import Header from "./layout/Header";
+import PageContent from "./layout/PageContent";
+import Footer from "./layout/Footer";
+import HomePage from "./pages/HomePage";
+import ShopPage from "./pages/ShopPage";
 
-function App() {
-  const [count, setCount] = useState(0)
-
+function Placeholder({ title }) {
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    <div className="mx-auto w-full max-w-6xl px-4 py-10">
+      <h1 className="text-xl font-semibold">{title}</h1>
+    </div>
+  );
 }
 
-export default App
+export default function App() {
+  return (
+    <div className="flex min-h-screen flex-col bg-white">
+      <Header />
+      <PageContent>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/about" element={<Placeholder title="About" />} />
+          <Route path="/contact" element={<Placeholder title="Contact" />} />
+        </Routes>
+      </PageContent>
+      <Footer />
+    </div>
+  );
+}
